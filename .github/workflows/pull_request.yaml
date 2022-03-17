@@ -1,35 +1,16 @@
-name: Prisma Cloud IaC Scan 
-on: 
-  push:
-    branches: main
-  pull_request:
-    branches: main
-
+name: build
+on:
+  pull_request
 jobs:
-  prisma_cloud_iac_scan:
+  checkov-job:
     runs-on: ubuntu-latest
-    name: Run Prisma Cloud IaC Scan to check 
+    name: checkov-action
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Run Bridgecrew 
-        id: Bridgecrew
-        uses: bridgecrewio/bridgecrew-action@master 
-        env:
-          PRISMA_API_URL: https://api.uk.prismacloud.io
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
         with:
-          api-key: ${{ secrets.BC_API_KEY }}
-          soft_fail: true
-          output_format: sarif
-          
-      - name: Upload Prisma IAC Scan results
-        uses: github/codeql-action/upload-sarif@v1
-        if: always()
-        with:
-         sarif_file: 'results.sarif'
-      - name: Scan Report
-        uses: actions/upload-artifact@v2
-        with:
-         name: scan-report
-         path: 'results.sarif'
+          directory: terraform/
