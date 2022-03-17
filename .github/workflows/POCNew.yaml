@@ -1,10 +1,9 @@
-#text
 name: Prisma Cloud IaC Scan 
 on: 
   push:
-    branches: main
+    branches: master
   pull_request:
-    branches: main
+    branches: master
 
 jobs:
   prisma_cloud_iac_scan:
