@@ -1,4 +1,3 @@
-#test
 name: Prisma Cloud IaC Scan 
 on: 
   push:
