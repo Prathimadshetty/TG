@@ -27,4 +27,3 @@ jobs:
          ./snyk test --all-projects
          echo "----------Snyk Monitor-----------"
           ./snyk monitor --all-projects 
-          continue-on-error: true
